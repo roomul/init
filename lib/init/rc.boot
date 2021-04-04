@@ -54,7 +54,9 @@ log "Remounting rootfs as read-only..."; {
 }
 
 log "Checking filesystems..."; {
-    fsck -ATat noopts=_netdev
+    if command -v fsck >/dev/null; then
+        fsck -ATat noopts=_netdev
+    fi
 
     # It can't be assumed that success is 0
     # and failure is > 0.
